@@ -5,12 +5,20 @@ const morgan = require('morgan');
 const port = process.env.PORT || 8000;
 const path = require('path');
 const files = require('./routes/files')
+const multer  = require('multer')
+// var upload = multer({ dest: 'uploads/' })
+const fileUpload = require('express-fileupload');
+
+
 
 app.disable('x-powered-by');
 
 app.use(morgan('dev'));
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 app.use(express.static(path.join('public')));
+app.use(fileUpload());
+
+
 
 app.use(files);
 
